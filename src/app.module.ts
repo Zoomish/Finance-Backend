@@ -13,7 +13,7 @@ import { ConfigModule } from '@nestjs/config'
         CategoryModule,
         AuthModule,
         TransactionModule,
-        ConfigModule.forRoot(),
+        ConfigModule.forRoot({ isGlobal: true }),
     ],
     controllers: [AppController],
     providers: [AppService],
