@@ -12,7 +12,7 @@ export class Category {
     id: number
 
     @Column()
-    email: string
+    title: string
 
     @Column()
     password: string
