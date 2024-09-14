@@ -1,3 +1,4 @@
+import { User } from 'src/user/entities/user.entity'
 import {
     Column,
     CreateDateColumn,
@@ -14,8 +15,7 @@ export class Category {
     @Column()
     title: string
 
-    @Column()
-    password: string
+    user: User
 
     @CreateDateColumn()
     createdAt: Date
