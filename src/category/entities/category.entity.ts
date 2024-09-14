@@ -3,6 +3,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -17,6 +18,7 @@ export class Category {
     title: string
 
     @ManyToOne(() => User, (user) => user.categories, { eager: true })
+    @JoinColumn({ name: 'id' })
     user: User
 
     @CreateDateColumn()
