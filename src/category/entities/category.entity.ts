@@ -3,6 +3,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm'
@@ -15,6 +16,7 @@ export class Category {
     @Column()
     title: string
 
+    @ManyToOne(() => User, (user) => user.categories, { eager: true })
     user: User
 
     @CreateDateColumn()
