@@ -29,7 +29,7 @@ export class Transaction {
     user: User
 
     @ManyToOne(() => Category, (category) => category.transactions)
-    @JoinColumn({ name: 'user_id' })
+    @JoinColumn({ name: 'category_id' })
     category: Category
 
     @CreateDateColumn()
