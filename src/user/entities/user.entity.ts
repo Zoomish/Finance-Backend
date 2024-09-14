@@ -19,7 +19,9 @@ export class User {
     @Column()
     password: string
 
-    @OneToMany(() => Category, (category) => category.user)
+    @OneToMany(() => Category, (category) => category.user, {
+        onDelete: 'CASCADE',
+    })
     categories: Category[]
 
     @CreateDateColumn()
