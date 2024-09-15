@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from './entities/user.entity'
 import { Repository } from 'typeorm'
+import * as argon2 from 'argon2'
 
 @Injectable()
 export class UserService {
