@@ -24,7 +24,7 @@ export class UserService {
         })
     }
 
-    findOne() {
-        return `This action returns all user`
+    async findOne(email: string) {
+        return await this.userRepository.findOne({ where: { email } })
     }
 }
