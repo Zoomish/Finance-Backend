@@ -18,7 +18,10 @@ export class UserService {
         if (exist) {
             throw new BadRequestException('User already exists')
         }
-        return 'This action adds a new user'
+        return await this.userRepository.create({
+            email: createUserDto.email,
+            password: await argon2.hash(createUserDto.password),
+        })
     }
 
     findOne() {
