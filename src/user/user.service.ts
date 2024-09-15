@@ -7,7 +7,7 @@ export class UserService {
         return 'This action adds a new user'
     }
 
-    findAll() {
+    findOne() {
         return `This action returns all user`
     }
 }

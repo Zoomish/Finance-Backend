@@ -20,7 +20,7 @@ export class UserController {
     }
 
     @Get()
-    findAll() {
-        return this.userService.findAll()
+    findOne() {
+        return this.userService.findOne()
     }
 }
