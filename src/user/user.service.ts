@@ -10,7 +10,10 @@ export class UserService {
         @InjectRepository(User)
         private readonly userRepository: Repository<User>
     ) {}
-    create(createUserDto: CreateUserDto) {
+    async create(createUserDto: CreateUserDto) {
+        const exist = await this.userRepository.findOne({
+            where: { email: createUserDto.email },
+        })
         return 'This action adds a new user'
     }
 
