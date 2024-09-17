@@ -15,4 +15,11 @@ export class AuthService {
         const isValid = user && (await argon2.verify(user.password, pass))
         return isValid ? user : null
     }
+
+    async login(user: any) {
+        const payload = { username: user.username, sub: user.userId }
+        return {
+            access_token: this.jwtService.sign(payload),
+        }
+    }
 }
