@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import { UserService } from 'src/user/user.service'
 import * as argon2 from 'argon2'
+import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class AuthService {
-    constructor(private usersService: UserService) {}
+    constructor(
+        private usersService: UserService,
+        private readonly jwtService: JwtService
+    ) {}
 
     async validateUser(email: string, pass: string): Promise<any> {
         const user = await this.usersService.findOne(email)
