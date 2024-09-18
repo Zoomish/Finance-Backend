@@ -11,7 +11,10 @@ export class CategoryService {
         @InjectRepository(Category)
         private readonly categoryRepository: Repository<Category>
     ) {}
-    create(createCategoryDto: CreateCategoryDto, id: number) {
+    async create(createCategoryDto: CreateCategoryDto, id: number) {
+        const isExist = await this.categoryRepository.findBy({
+            user: { id },
+        })
         return 'This action adds a new category'
     }
 
