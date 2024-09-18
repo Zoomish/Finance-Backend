@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { UpdateCategoryDto } from './dto/update-category.dto'
 import { Repository } from 'typeorm'
@@ -16,19 +16,49 @@ export class CategoryService {
             user: { id },
             title: createCategoryDto.title,
         })
-        return 'This action adds a new category'
+        if (isExist.length) {
+            throw new BadRequestException(
+                'Category with this title already exists'
+            )
+        }
+        const category = this.categoryRepository.save({
+            ...createCategoryDto,
+            user: { id },
+        })
+        return category
     }
 
-    findAll() {
-        return `This action returns all category`
+    async findAll(id: number) {
+        return await this.categoryRepository.find({
+            where: { user: { id } },
+            relations: {
+                transactions: true,
+            },
+        })
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} category`
+    async findOne(id: number) {
+        const isExist = await this.categoryRepository.findOne({
+            where: { id },
+            relations: {
+                user: true,
+                transactions: true,
+            },
+        })
+        if (!isExist) {
+            throw new BadRequestException('Category not found')
+        }
+        return isExist
     }
 
-    update(id: number, updateCategoryDto: UpdateCategoryDto) {
-        return `This action updates a #${id} category`
+    async update(id: number, updateCategoryDto: UpdateCategoryDto) {
+        const isExist = await this.categoryRepository.findOne({
+            where: { id },
+        })
+        if (!isExist) {
+            throw new BadRequestException('Category not found')
+        }
+        return await this.categoryRepository.update(id, updateCategoryDto)
     }
 
     remove(id: number) {
