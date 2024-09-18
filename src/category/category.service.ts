@@ -62,7 +62,7 @@ export class CategoryService {
     }
 
     async remove(id: number) {
-        const category = this.categoryRepository.findOne({
+        const category = await this.categoryRepository.findOne({
             where: { id },
         })
         if (!category) {
