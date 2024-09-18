@@ -14,6 +14,9 @@ export class CreateTransactionDto {
     @MinLength(6)
     type: 'expense' | 'income'
 
+    @IsNotEmpty()
     category: Category
+
+    @IsNotEmpty()
     user: User
 }
