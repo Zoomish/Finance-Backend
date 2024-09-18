@@ -14,6 +14,7 @@ export class CategoryService {
     async create(createCategoryDto: CreateCategoryDto, id: number) {
         const isExist = await this.categoryRepository.findBy({
             user: { id },
+            title: createCategoryDto.title,
         })
         return 'This action adds a new category'
     }

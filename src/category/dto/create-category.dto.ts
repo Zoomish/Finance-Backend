@@ -3,7 +3,7 @@ import { User } from 'src/user/entities/user.entity'
 
 export class CreateCategoryDto {
     @IsNotEmpty()
-    titile: string
+    title: string
 
     @IsOptional()
     user?: User
