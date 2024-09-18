@@ -58,11 +58,7 @@ export class CategoryService {
         if (!isExist) {
             throw new BadRequestException('Category not found')
         }
-        const category = await this.categoryRepository.save({
-            id,
-            ...updateCategoryDto,
-        })
-        return category
+        return await this.categoryRepository.update(id, updateCategoryDto)
     }
 
     remove(id: number) {
