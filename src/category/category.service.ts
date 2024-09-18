@@ -51,8 +51,18 @@ export class CategoryService {
         return isExist
     }
 
-    update(id: number, updateCategoryDto: UpdateCategoryDto) {
-        return `This action updates a #${id} category`
+    async update(id: number, updateCategoryDto: UpdateCategoryDto) {
+        const isExist = await this.categoryRepository.findOne({
+            where: { id },
+        })
+        if (!isExist) {
+            throw new BadRequestException('Category not found')
+        }
+        const category = await this.categoryRepository.save({
+            id,
+            ...updateCategoryDto,
+        })
+        return category
     }
 
     remove(id: number) {
