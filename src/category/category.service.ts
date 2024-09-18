@@ -28,8 +28,8 @@ export class CategoryService {
         return category
     }
 
-    findAll() {
-        return `This action returns all category`
+    async findAll(id: number) {
+        return await this.categoryRepository.find({ where: { user: { id } } })
     }
 
     findOne(id: number) {
