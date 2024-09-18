@@ -11,23 +11,23 @@ export class TransactionService {
         @InjectRepository(Transaction)
         private readonly transactionRepository: Repository<Transaction>
     ) {}
-    create(createTransactionDto: CreateTransactionDto) {
+    async create(createTransactionDto: CreateTransactionDto) {
         return 'This action adds a new transaction'
     }
 
-    findAll() {
+    async findAll() {
         return `This action returns all transaction`
     }
 
-    findOne(id: number) {
+    async findOne(id: number) {
         return `This action returns a #${id} transaction`
     }
 
-    update(id: number, updateTransactionDto: UpdateTransactionDto) {
+    async update(id: number, updateTransactionDto: UpdateTransactionDto) {
         return `This action updates a #${id} transaction`
     }
 
-    remove(id: number) {
+    async remove(id: number) {
         return `This action removes a #${id} transaction`
     }
 }
