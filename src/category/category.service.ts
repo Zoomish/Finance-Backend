@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { UpdateCategoryDto } from './dto/update-category.dto'
 import { Repository } from 'typeorm'
@@ -16,6 +16,11 @@ export class CategoryService {
             user: { id },
             title: createCategoryDto.title,
         })
+        if (isExist) {
+            throw new BadRequestException(
+                'Category with this title already exists'
+            )
+        }
         return 'This action adds a new category'
     }
 
