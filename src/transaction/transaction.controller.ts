@@ -6,6 +6,8 @@ import {
     Patch,
     Param,
     Delete,
+    ValidationPipe,
+    UsePipes,
 } from '@nestjs/common'
 import { TransactionService } from './transaction.service'
 import { CreateTransactionDto } from './dto/create-transaction.dto'
@@ -16,6 +18,7 @@ export class TransactionController {
     constructor(private readonly transactionService: TransactionService) {}
 
     @Post()
+    @UsePipes(ValidationPipe)
     create(@Body() createTransactionDto: CreateTransactionDto) {
         return this.transactionService.create(createTransactionDto)
     }
