@@ -11,8 +11,11 @@ export class TransactionService {
         @InjectRepository(Transaction)
         private readonly transactionRepository: Repository<Transaction>
     ) {}
-    async create(createTransactionDto: CreateTransactionDto) {
-        return 'This action adds a new transaction'
+    async create(createTransactionDto: CreateTransactionDto, id: number) {
+        return this.transactionRepository.save({
+            ...createTransactionDto,
+            user: id,
+        })
     }
 
     async findAll() {
