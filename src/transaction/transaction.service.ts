@@ -14,7 +14,7 @@ export class TransactionService {
     async create(createTransactionDto: CreateTransactionDto, id: number) {
         return this.transactionRepository.save({
             ...createTransactionDto,
-            user: id,
+            user: { id },
         })
     }
 
