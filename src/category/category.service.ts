@@ -11,7 +11,7 @@ export class CategoryService {
         @InjectRepository(Category)
         private readonly categoryRepository: Repository<Category>
     ) {}
-    create(createCategoryDto: CreateCategoryDto) {
+    create(createCategoryDto: CreateCategoryDto, id: number) {
         return 'This action adds a new category'
     }
 
