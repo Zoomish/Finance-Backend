@@ -37,7 +37,16 @@ export class CategoryService {
         })
     }
 
-    findOne(id: number) {
+    async findOne(id: number) {
+        const isExist = await this.categoryRepository.findOne({
+            where: { id },
+            relations: {
+                user: true,
+            },
+        })
+        if (!isExist) {
+            throw new BadRequestException('Category not found')
+        }
         return `This action returns a #${id} category`
     }
 
