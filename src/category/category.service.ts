@@ -47,7 +47,7 @@ export class CategoryService {
         if (!isExist) {
             throw new BadRequestException('Category not found')
         }
-        return `This action returns a #${id} category`
+        return isExist
     }
 
     update(id: number, updateCategoryDto: UpdateCategoryDto) {
