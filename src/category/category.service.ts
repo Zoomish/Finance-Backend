@@ -21,7 +21,11 @@ export class CategoryService {
                 'Category with this title already exists'
             )
         }
-        return 'This action adds a new category'
+        const category = this.categoryRepository.save({
+            ...createCategoryDto,
+            user: { id },
+        })
+        return category
     }
 
     findAll() {
