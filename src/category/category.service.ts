@@ -42,6 +42,7 @@ export class CategoryService {
             where: { id },
             relations: {
                 user: true,
+                transactions: true,
             },
         })
         if (!isExist) {
