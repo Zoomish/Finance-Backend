@@ -18,8 +18,12 @@ export class TransactionService {
         })
     }
 
-    async findAll() {
-        return `This action returns all transaction`
+    async findAll(id) {
+        return this.transactionRepository.find({
+            where: {
+                user: { id },
+            },
+        })
     }
 
     async findOne(id: number) {
