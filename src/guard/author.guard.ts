@@ -1,7 +1,8 @@
-import { CanActivate, ExecutionContext } from '@nestjs/common'
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
 import { CategoryService } from 'src/category/category.service'
 import { TransactionService } from 'src/transaction/transaction.service'
 
+@Injectable()
 export class AuthorGuard implements CanActivate {
     constructor(
         private readonly transactionService: TransactionService,
