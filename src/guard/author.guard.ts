@@ -6,7 +6,7 @@ export class AuthorGuard implements CanActivate {
         const { id, type } = req.params
 
         switch (type) {
-            case 'transactions':
+            case 'transaction':
             case 'category':
             default:
                 throw new Error('Wrong type')
