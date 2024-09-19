@@ -16,6 +16,7 @@ import { TransactionService } from './transaction.service'
 import { CreateTransactionDto } from './dto/create-transaction.dto'
 import { UpdateTransactionDto } from './dto/update-transaction.dto'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
+import { AuthorGuard } from 'src/guard/author.guard'
 
 @Controller('transaction')
 export class TransactionController {
@@ -52,7 +53,7 @@ export class TransactionController {
     }
 
     @Get(':type/:id')
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, AuthorGuard)
     findOne(@Param('id') id: string) {
         return this.transactionService.findOne(+id)
     }
