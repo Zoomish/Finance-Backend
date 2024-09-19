@@ -1,4 +1,4 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
+import { BadRequestException, CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
 import { CategoryService } from 'src/category/category.service'
 import { TransactionService } from 'src/transaction/transaction.service'
 
@@ -28,6 +28,6 @@ export class AuthorGuard implements CanActivate {
         if (entity && user && entity.user.id === user.id) {
             return true
         }
-        return false
+        throw new BadRequestException('Wrong author')
     }
 }
