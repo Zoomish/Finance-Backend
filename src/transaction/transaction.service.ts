@@ -1,4 +1,4 @@
-import { Injectable, NotAcceptableException } from '@nestjs/common'
+import { Injectable, NotAcceptableException, NotFoundException } from '@nestjs/common'
 import { CreateTransactionDto } from './dto/create-transaction.dto'
 import { UpdateTransactionDto } from './dto/update-transaction.dto'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -44,12 +44,18 @@ export class TransactionService {
             where: { id },
         })
         if (!isExist) {
-            throw new NotAcceptableException('Transaction not found')
+            throw new NotFoundException('Transaction not found')
         }
         return await this.transactionRepository.update(id, updateTransactionDto)
     }
 
     async remove(id: number) {
-        return `This action removes a #${id} transaction`
+        const transaction = await this.transactionRepository.findOne({
+            where: { id },
+        })
+        if (!transaction) {
+            throw new NotFoundException('Transaction not found')
+        }
+        return await this.transactionRepository.delete(id)
     }
 }
