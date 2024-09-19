@@ -37,11 +37,13 @@ export class TransactionController {
     }
 
     @Get(':id')
+    @UseGuards(JwtAuthGuard)
     findOne(@Param('id') id: string) {
         return this.transactionService.findOne(+id)
     }
 
     @Patch(':id')
+    @UseGuards(JwtAuthGuard)
     update(
         @Param('id') id: string,
         @Body() updateTransactionDto: UpdateTransactionDto
@@ -50,6 +52,7 @@ export class TransactionController {
     }
 
     @Delete(':id')
+    @UseGuards(JwtAuthGuard)
     remove(@Param('id') id: string) {
         return this.transactionService.remove(+id)
     }
