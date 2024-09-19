@@ -23,6 +23,9 @@ export class TransactionService {
             where: {
                 user: { id },
             },
+            order: {
+                createdAt: 'DESC',
+            },
         })
     }
 
