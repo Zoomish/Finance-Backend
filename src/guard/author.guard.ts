@@ -1,4 +1,9 @@
-import { BadRequestException, CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
+import {
+    BadRequestException,
+    CanActivate,
+    ExecutionContext,
+    Injectable,
+} from '@nestjs/common'
 import { CategoryService } from 'src/category/category.service'
 import { TransactionService } from 'src/transaction/transaction.service'
 
