@@ -40,7 +40,13 @@ export class TransactionService {
     }
 
     async update(id: number, updateTransactionDto: UpdateTransactionDto) {
-        return `This action updates a #${id} transaction`
+        const isExist = await this.transactionRepository.findOne({
+            where: { id },
+        })
+        if (!isExist) {
+            throw new Error('Transaction not found')
+        }
+        return await this.transactionRepository.update(id, updateTransactionDto)
     }
 
     async remove(id: number) {
