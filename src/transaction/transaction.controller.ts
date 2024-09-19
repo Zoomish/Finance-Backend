@@ -10,6 +10,7 @@ import {
     UsePipes,
     UseGuards,
     Req,
+    Query,
 } from '@nestjs/common'
 import { TransactionService } from './transaction.service'
 import { CreateTransactionDto } from './dto/create-transaction.dto'
@@ -31,16 +32,33 @@ export class TransactionController {
     }
 
     @Get()
-    findAll() {
-        return this.transactionService.findAll()
+    @UseGuards(JwtAuthGuard)
+    findAll(@Req() req) {
+        return this.transactionService.findAll(+req.user.id)
+    }
+
+    @Get('pagination')
+    @UseGuards(JwtAuthGuard)
+    getAllWithPagination(
+        @Req() req,
+        @Query('page') page: number,
+        @Query('limit') limit: number
+    ) {
+        return this.transactionService.getAllWithPagination(
+            +req.user.id,
+            +page,
+            +limit
+        )
     }
 
     @Get(':id')
+    @UseGuards(JwtAuthGuard)
     findOne(@Param('id') id: string) {
         return this.transactionService.findOne(+id)
     }
 
     @Patch(':id')
+    @UseGuards(JwtAuthGuard)
     update(
         @Param('id') id: string,
         @Body() updateTransactionDto: UpdateTransactionDto
@@ -49,6 +67,7 @@ export class TransactionController {
     }
 
     @Delete(':id')
+    @UseGuards(JwtAuthGuard)
     remove(@Param('id') id: string) {
         return this.transactionService.remove(+id)
     }

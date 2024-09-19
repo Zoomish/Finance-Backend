@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateTransactionDto } from './dto/create-transaction.dto'
 import { UpdateTransactionDto } from './dto/update-transaction.dto'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -18,19 +18,61 @@ export class TransactionService {
         })
     }
 
-    async findAll() {
-        return `This action returns all transaction`
+    async findAll(id) {
+        return this.transactionRepository.find({
+            where: {
+                user: { id },
+            },
+            order: {
+                createdAt: 'DESC',
+            },
+        })
     }
 
     async findOne(id: number) {
-        return `This action returns a #${id} transaction`
+        return await this.transactionRepository.findOne({
+            where: { id },
+            relations: {
+                user: true,
+                category: true,
+            },
+        })
     }
 
     async update(id: number, updateTransactionDto: UpdateTransactionDto) {
-        return `This action updates a #${id} transaction`
+        const isExist = await this.transactionRepository.findOne({
+            where: { id },
+        })
+        if (!isExist) {
+            throw new NotFoundException('Transaction not found')
+        }
+        return await this.transactionRepository.update(id, updateTransactionDto)
     }
 
     async remove(id: number) {
-        return `This action removes a #${id} transaction`
+        const transaction = await this.transactionRepository.findOne({
+            where: { id },
+        })
+        if (!transaction) {
+            throw new NotFoundException('Transaction not found')
+        }
+        return await this.transactionRepository.delete(id)
+    }
+
+    async getAllWithPagination(id: number, page: number, limit: number) {
+        return await this.transactionRepository.find({
+            where: {
+                user: { id },
+            },
+            relations: {
+                user: true,
+                category: true,
+            },
+            order: {
+                createdAt: 'DESC',
+            },
+            skip: (page - 1) * limit,
+            take: limit,
+        })
     }
 }
