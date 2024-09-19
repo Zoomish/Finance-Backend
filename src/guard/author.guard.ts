@@ -12,12 +12,18 @@ export class AuthorGuard implements CanActivate {
         const req = context.switchToHttp().getRequest()
         const { id, type } = req.params
 
+        let entity
         switch (type) {
             case 'transaction':
+                entity = await this.transactionService.findOne(+id)
+                break
             case 'category':
+                entity = await this.categoryService.findOne(+id)
+                break
             default:
                 throw new Error('Wrong type')
         }
+        const user = req.user
         return true
     }
 }
