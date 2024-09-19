@@ -29,6 +29,14 @@ export class TransactionService {
         })
     }
 
+    async findOne(id: number) {
+        return `This action returns a #${id} transaction`
+    }
+
+    async update(id: number, updateTransactionDto: UpdateTransactionDto) {
+        return `This action updates a #${id} transaction`
+    }
+
     async remove(id: number) {
         return `This action removes a #${id} transaction`
     }
