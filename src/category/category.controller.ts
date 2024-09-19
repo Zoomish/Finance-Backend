@@ -15,6 +15,7 @@ import { CategoryService } from './category.service'
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { UpdateCategoryDto } from './dto/update-category.dto'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
+import { AuthorGuard } from 'src/guard/author.guard'
 
 @Controller('category')
 export class CategoryController {
@@ -33,13 +34,13 @@ export class CategoryController {
         return this.categoryService.findAll(+req.user.id)
     }
 
-    @Get(':id')
+    @Get(':type/:id')
     @UseGuards(JwtAuthGuard)
     findOne(@Param('id') id: string) {
         return this.categoryService.findOne(+id)
     }
 
-    @Patch(':id')
+    @Patch(':type/:id')
     @UseGuards(JwtAuthGuard)
     update(
         @Param('id') id: string,
@@ -48,7 +49,7 @@ export class CategoryController {
         return this.categoryService.update(+id, updateCategoryDto)
     }
 
-    @Delete(':id')
+    @Delete(':type/:id')
     @UseGuards(JwtAuthGuard)
     remove(@Param('id') id: string) {
         return this.categoryService.remove(+id)
