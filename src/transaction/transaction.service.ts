@@ -1,4 +1,4 @@
-import { Injectable, NotAcceptableException, NotFoundException } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateTransactionDto } from './dto/create-transaction.dto'
 import { UpdateTransactionDto } from './dto/update-transaction.dto'
 import { InjectRepository } from '@nestjs/typeorm'
