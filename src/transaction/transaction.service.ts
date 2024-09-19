@@ -30,7 +30,13 @@ export class TransactionService {
     }
 
     async findOne(id: number) {
-        return `This action returns a #${id} transaction`
+        return await this.transactionRepository.findOne({
+            where: { id },
+            relations: {
+                user: true,
+                category: true,
+            },
+        })
     }
 
     async update(id: number, updateTransactionDto: UpdateTransactionDto) {
