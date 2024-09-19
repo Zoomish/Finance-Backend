@@ -52,6 +52,7 @@ export class TransactionController {
         )
     }
 
+    @Get(':type')
     @Get(':type/find')
     @UseGuards(JwtAuthGuard, AuthorGuard)
     find(@Param('id') id: string) {
