@@ -64,6 +64,10 @@ export class TransactionService {
             where: {
                 user: { id },
             },
+            relations: {
+                user: true,
+                category: true,
+            },
             order: {
                 createdAt: 'DESC',
             },
