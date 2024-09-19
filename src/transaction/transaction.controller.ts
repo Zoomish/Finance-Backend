@@ -59,7 +59,7 @@ export class TransactionController {
     }
 
     @Patch(':type/:id')
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, AuthorGuard)
     update(
         @Param('id') id: string,
         @Body() updateTransactionDto: UpdateTransactionDto
@@ -68,7 +68,7 @@ export class TransactionController {
     }
 
     @Delete(':type/:id')
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, AuthorGuard)
     remove(@Param('id') id: string) {
         return this.transactionService.remove(+id)
     }
