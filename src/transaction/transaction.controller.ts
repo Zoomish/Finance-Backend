@@ -36,6 +36,12 @@ export class TransactionController {
         return this.transactionService.findAll(+req.user.id)
     }
 
+    @Get('pagination')
+    @UseGuards(JwtAuthGuard)
+    getAllWithPagination(@Req() req) {
+        return this.transactionService.getAllWithPagination(+req.user.id, 1, 10)
+    }
+
     @Get(':id')
     @UseGuards(JwtAuthGuard)
     findOne(@Param('id') id: string) {
