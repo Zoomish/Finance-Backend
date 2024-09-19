@@ -52,6 +52,12 @@ export class TransactionController {
         )
     }
 
+    @Get(':type/find')
+    @UseGuards(JwtAuthGuard, AuthorGuard)
+    find(@Param('id') id: string) {
+        return this.transactionService.findOne(+id)
+    }
+
     @Get(':type/:id')
     @UseGuards(JwtAuthGuard, AuthorGuard)
     findOne(@Param('id') id: string) {
