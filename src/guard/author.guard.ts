@@ -24,7 +24,7 @@ export class AuthorGuard implements CanActivate {
                 throw new Error('Wrong type')
         }
         const user = req.user
-        if (entity && entity.user.id === user.id) {
+        if (entity && user && entity.user.id === user.id) {
             return true
         }
         return false
