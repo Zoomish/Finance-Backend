@@ -1,7 +1,7 @@
-import { CanActivate } from '@nestjs/common'
+import { CanActivate, ExecutionContext } from '@nestjs/common'
 
 export class AuthorGuard implements CanActivate {
-    async canActivate() {
+    async canActivate(context: ExecutionContext): Promise<boolean> {
         return true
     }
 }
