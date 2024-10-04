@@ -30,7 +30,7 @@ export class TransactionService {
     }
 
     async findAllByType(id, type) {
-        return await this.transactionRepository.find({
+        const transactions = await this.transactionRepository.find({
             where: {
                 user: { id },
                 type,
@@ -39,6 +39,7 @@ export class TransactionService {
                 createdAt: 'DESC',
             },
         })
+        transactions.reduce(()=> ,0)
     }
 
     async findOne(id: number) {
