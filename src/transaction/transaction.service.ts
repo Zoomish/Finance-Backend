@@ -19,7 +19,7 @@ export class TransactionService {
     }
 
     async findAll(id) {
-        return this.transactionRepository.find({
+        return await this.transactionRepository.find({
             where: {
                 user: { id },
             },
@@ -30,7 +30,7 @@ export class TransactionService {
     }
 
     async findAllByType(id, type) {
-        return this.transactionRepository.find({
+        return await this.transactionRepository.find({
             where: {
                 user: { id },
                 type,
