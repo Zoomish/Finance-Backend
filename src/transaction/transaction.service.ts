@@ -12,7 +12,7 @@ export class TransactionService {
         private readonly transactionRepository: Repository<Transaction>
     ) {}
     async create(createTransactionDto: CreateTransactionDto, id: number) {
-        return this.transactionRepository.save({
+        return await this.transactionRepository.save({
             ...createTransactionDto,
             user: { id },
         })
