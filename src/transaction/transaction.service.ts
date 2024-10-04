@@ -29,6 +29,18 @@ export class TransactionService {
         })
     }
 
+    async findAllByType(id, type) {
+        return this.transactionRepository.find({
+            where: {
+                user: { id },
+                type,
+            },
+            order: {
+                createdAt: 'DESC',
+            },
+        })
+    }
+
     async findOne(id: number) {
         return await this.transactionRepository.findOne({
             where: { id },
