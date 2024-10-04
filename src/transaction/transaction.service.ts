@@ -39,7 +39,7 @@ export class TransactionService {
                 createdAt: 'DESC',
             },
         })
-        transactions.reduce((acc, obj) => acc + obj.amount, 0)
+        return transactions.reduce((acc, obj) => acc + obj.amount, 0)
     }
 
     async findOne(id: number) {
