@@ -12,14 +12,14 @@ export class TransactionService {
         private readonly transactionRepository: Repository<Transaction>
     ) {}
     async create(createTransactionDto: CreateTransactionDto, id: number) {
-        return this.transactionRepository.save({
+        return await this.transactionRepository.save({
             ...createTransactionDto,
             user: { id },
         })
     }
 
     async findAll(id) {
-        return this.transactionRepository.find({
+        return await this.transactionRepository.find({
             where: {
                 user: { id },
             },
@@ -27,6 +27,19 @@ export class TransactionService {
                 createdAt: 'DESC',
             },
         })
+    }
+
+    async findAllByType(id, type) {
+        const transactions = await this.transactionRepository.find({
+            where: {
+                user: { id },
+                type,
+            },
+            order: {
+                createdAt: 'DESC',
+            },
+        })
+        return transactions.reduce((acc, obj) => acc + obj.amount, 0)
     }
 
     async findOne(id: number) {
