@@ -18,12 +18,8 @@ import { UserModule } from './user/user.module'
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: (configService: ConfigService) => ({
-                type: 'postgres',
-                host: configService.get('DB_HOST'),
-                port: configService.get('DB_PORT'),
-                username: configService.get('DB_USERNAME'),
-                password: configService.get('DB_PASSWORD'),
-                database: configService.get('DB_NAME'),
+                url: configService.get('DB_URL'),
+                driver: configService.get('DB_DRIVER'),
                 entities: [__dirname + '/**/*.entity{.ts,.js}'],
                 synchronize: true,
                 ssl: true,
