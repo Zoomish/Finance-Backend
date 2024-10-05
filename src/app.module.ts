@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module'
 import { CategoryModule } from './category/category.module'
 import { TransactionModule } from './transaction/transaction.module'
 import { UserModule } from './user/user.module'
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const fs = require('fs')
 
 @Module({
     imports: [
@@ -28,6 +30,7 @@ import { UserModule } from './user/user.module'
                 synchronize: true,
                 ssl: {
                     rejectUnauthorized: true,
+                    ca: fs.readFileSync('./ca.pem').toString(),
                 },
                 autoLoadEntities: true,
             }),
