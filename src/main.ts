@@ -6,7 +6,7 @@ async function bootstrap() {
     app.setGlobalPrefix('api')
     app.enableCors()
     app.getHttpServer()
-    await app.listen(process.env.PORT, async () =>
+    await app.listen(3000, async () =>
         console.log(`Server started on port ${await app.getUrl()}`)
     )
 }
