@@ -20,7 +20,7 @@ export class AuthService {
     async login(user: IUser) {
         const { id, email } = user
         return {
-            access_token: this.jwtService.sign({ id, email }),
+            token: this.jwtService.sign({ id, email }),
         }
     }
 }
