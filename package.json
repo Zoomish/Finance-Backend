@@ -1,8 +1,11 @@
 {
-  "name": "backend",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "name": "zoomish_finance-backend",
+  "version": "1.0.1",
+  "description": "This is a backend for Zoomish Finance",
+  "author": {
+      "name": "Zoomish",
+      "url": "https://github.com/Zoomish"
+  },
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
